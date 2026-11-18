@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: the-silent-dead
+    runtime: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    healthCheckPath: /health
