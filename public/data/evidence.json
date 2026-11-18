@@ -1,0 +1,343 @@
+[
+  {
+    "id": "12-papir",
+    "name": "The Torn Page",
+    "image": "assets/evidence/12-papir.jpg",
+    "description": "A numbered sheet of paper marked with the number 12.",
+    "tags": [
+      "paper",
+      "number",
+      "document"
+    ]
+  },
+  {
+    "id": "aktovka",
+    "name": "The Briefcase",
+    "image": "assets/evidence/aktovka.jpg",
+    "description": "A worn briefcase left behind, its contents no longer accounted for.",
+    "tags": [
+      "briefcase",
+      "leather",
+      "documents"
+    ]
+  },
+  {
+    "id": "cekic",
+    "name": "The Hammer",
+    "image": "assets/evidence/cekic.jpg",
+    "description": "A heavy hammer abandoned on the ground.",
+    "tags": [
+      "tool",
+      "metal",
+      "workshop"
+    ]
+  },
+  {
+    "id": "cigareta",
+    "name": "The Cigarette",
+    "image": "assets/evidence/cigareta.jpg",
+    "description": "A cigarette and its remains lie in an old ashtray.",
+    "tags": [
+      "smoke",
+      "ashtray",
+      "tobacco"
+    ]
+  },
+  {
+    "id": "cudoviste-i-fenjer",
+    "name": "The Creature and the Lantern",
+    "image": "assets/evidence/cudoviste-i-fenjer.jpg",
+    "description": "A strange silhouette appears beyond the trees, beside a small light.",
+    "tags": [
+      "creature",
+      "forest",
+      "lantern"
+    ]
+  },
+  {
+    "id": "cvijet-na-ploci",
+    "name": "The Flower on the Board",
+    "image": "assets/evidence/cvijet-na-ploci.jpg",
+    "description": "A pale flower has been placed carefully on a dark board.",
+    "tags": [
+      "flower",
+      "board",
+      "white"
+    ]
+  },
+  {
+    "id": "daske",
+    "name": "The Wooden Boards",
+    "image": "assets/evidence/daske.jpg",
+    "description": "A message has been scratched into a set of old wooden boards.",
+    "tags": [
+      "wood",
+      "message",
+      "writing"
+    ]
+  },
+  {
+    "id": "duga",
+    "name": "The Rainbow",
+    "image": "assets/evidence/duga.jpg",
+    "description": "A rainbow stretches across a distant, storm-dark landscape.",
+    "tags": [
+      "rainbow",
+      "sky",
+      "landscape"
+    ]
+  },
+  {
+    "id": "dzepni-sat",
+    "name": "The Pocket Watch",
+    "image": "assets/evidence/dzepni-sat.jpg",
+    "description": "An old pocket watch rests among papers and books.",
+    "tags": [
+      "watch",
+      "time",
+      "metal"
+    ]
+  },
+  {
+    "id": "fenjer-na-zidu",
+    "name": "The Wall Lantern",
+    "image": "assets/evidence/fenjer-na-zidu.jpg",
+    "description": "A lit lantern hangs from a cold stone wall.",
+    "tags": [
+      "lantern",
+      "light",
+      "stone"
+    ]
+  },
+  {
+    "id": "flaster",
+    "name": "The Bandage",
+    "image": "assets/evidence/flaster.jpg",
+    "description": "A used bandage is wrapped around an injured arm.",
+    "tags": [
+      "bandage",
+      "medical",
+      "fabric"
+    ]
+  },
+  {
+    "id": "igrace-karte",
+    "name": "The Playing Cards",
+    "image": "assets/evidence/igrace-karte.jpg",
+    "description": "Several playing cards have been scattered across the floor.",
+    "tags": [
+      "cards",
+      "game",
+      "paper"
+    ]
+  },
+  {
+    "id": "kacket-i-lizalo",
+    "name": "The Cap and Lollipop",
+    "image": "assets/evidence/kacket-i-lizalo.jpg",
+    "description": "A small cap and a brightly coloured lollipop have been left together.",
+    "tags": [
+      "cap",
+      "lollipop",
+      "sweet"
+    ]
+  },
+  {
+    "id": "kamera",
+    "name": "The Camera",
+    "image": "assets/evidence/kamera.jpg",
+    "description": "An old camera lies abandoned among debris.",
+    "tags": [
+      "camera",
+      "photography",
+      "metal"
+    ]
+  },
+  {
+    "id": "kostur",
+    "name": "The Skeleton",
+    "image": "assets/evidence/kostur.jpg",
+    "description": "A human skeleton lies arranged on an old examination table.",
+    "tags": [
+      "skeleton",
+      "bones",
+      "anatomy"
+    ]
+  },
+  {
+    "id": "led",
+    "name": "The Ice",
+    "image": "assets/evidence/led.jpg",
+    "description": "A small stack of ice blocks glistens in the dim light.",
+    "tags": [
+      "ice",
+      "cold",
+      "water"
+    ]
+  },
+  {
+    "id": "lisice-i-knjige",
+    "name": "The Handcuffs and Books",
+    "image": "assets/evidence/lisice-i-knjige.jpg",
+    "description": "A pair of handcuffs rests beside a stack of old books.",
+    "tags": [
+      "handcuffs",
+      "books",
+      "metal"
+    ]
+  },
+  {
+    "id": "mac",
+    "name": "The Sword",
+    "image": "assets/evidence/mac.jpg",
+    "description": "A sword has been left among scattered tools and debris.",
+    "tags": [
+      "sword",
+      "weapon",
+      "metal"
+    ]
+  },
+  {
+    "id": "mikrofon",
+    "name": "The Microphone",
+    "image": "assets/evidence/mikrofon.jpg",
+    "description": "A microphone stands alone in a dark, abandoned room.",
+    "tags": [
+      "microphone",
+      "sound",
+      "performance"
+    ]
+  },
+  {
+    "id": "odvijac-i-sendvic",
+    "name": "The Screwdriver and Sandwich",
+    "image": "assets/evidence/odvijac-i-sendvic.jpg",
+    "description": "A screwdriver and an unfinished sandwich lie side by side.",
+    "tags": [
+      "screwdriver",
+      "sandwich",
+      "tool"
+    ]
+  },
+  {
+    "id": "pancir",
+    "name": "The Armour",
+    "image": "assets/evidence/pancir.jpg",
+    "description": "A suit of armour stands in a forgotten stone chamber.",
+    "tags": [
+      "armour",
+      "protection",
+      "metal"
+    ]
+  },
+  {
+    "id": "perika-i-sprej",
+    "name": "The Wig and Spray",
+    "image": "assets/evidence/perika-i-sprej.jpg",
+    "description": "A dark wig and a can of spray have been left behind.",
+    "tags": [
+      "wig",
+      "spray",
+      "disguise"
+    ]
+  },
+  {
+    "id": "pismo-i-casa",
+    "name": "The Letter and Glass",
+    "image": "assets/evidence/pismo-i-casa.jpg",
+    "description": "A sealed letter lies beside a drinking glass.",
+    "tags": [
+      "letter",
+      "glass",
+      "paper"
+    ]
+  },
+  {
+    "id": "pistaljka-i-lopta",
+    "name": "The Whistle and Ball",
+    "image": "assets/evidence/pistaljka-i-lopta.jpg",
+    "description": "A whistle and a ball have been abandoned together.",
+    "tags": [
+      "whistle",
+      "ball",
+      "sport"
+    ]
+  },
+  {
+    "id": "ploca-s-slikama",
+    "name": "The Board of Photographs",
+    "image": "assets/evidence/ploca-s-slikama.jpg",
+    "description": "A crowded board of photographs is connected with red string.",
+    "tags": [
+      "photographs",
+      "board",
+      "investigation"
+    ]
+  },
+  {
+    "id": "rukavice",
+    "name": "The Gloves",
+    "image": "assets/evidence/rukavice.jpg",
+    "description": "A pair of worn gloves rests beside a cut lemon.",
+    "tags": [
+      "gloves",
+      "fabric",
+      "lemon"
+    ]
+  },
+  {
+    "id": "sal-i-meci",
+    "name": "The Scarf and Bullets",
+    "image": "assets/evidence/sal-i-meci.jpg",
+    "description": "A scarf lies beside several loose rounds of ammunition.",
+    "tags": [
+      "scarf",
+      "ammunition",
+      "fabric"
+    ]
+  },
+  {
+    "id": "skrinja-s-blagom",
+    "name": "The Treasure Chest",
+    "image": "assets/evidence/skrinja-s-blagom.jpg",
+    "description": "An open chest reveals a collection of old treasure.",
+    "tags": [
+      "chest",
+      "treasure",
+      "gold"
+    ]
+  },
+  {
+    "id": "skrivena-jaja",
+    "name": "The Hidden Eggs",
+    "image": "assets/evidence/skrivena-jaja.jpg",
+    "description": "A clutch of eggs has been concealed among tangled roots.",
+    "tags": [
+      "eggs",
+      "nest",
+      "forest"
+    ]
+  },
+  {
+    "id": "sos",
+    "name": "The SOS Message",
+    "image": "assets/evidence/sos.jpg",
+    "description": "A distress message has been written on a worn sheet.",
+    "tags": [
+      "sos",
+      "message",
+      "paper"
+    ]
+  },
+  {
+    "id": "tanjir",
+    "name": "The Plate",
+    "image": "assets/evidence/tanjir.jpg",
+    "description": "An old decorative plate rests on a dusty table.",
+    "tags": [
+      "plate",
+      "ceramic",
+      "table"
+    ]
+  }
+]

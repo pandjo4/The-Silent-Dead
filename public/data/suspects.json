@@ -1,0 +1,482 @@
+[
+  {
+    "id": "arhitektica",
+    "name": "The Architect",
+    "image": "assets/suspects/arhitektica.jpg",
+    "description": "A practical architect whose plans may reveal more than the buildings she designed.",
+    "visualCharacteristics": [
+      "architecture",
+      "plans",
+      "tools"
+    ],
+    "associatedObjects": [
+      "paper",
+      "design"
+    ],
+    "tags": [
+      "architecture",
+      "plans",
+      "tools"
+    ]
+  },
+  {
+    "id": "baka",
+    "name": "The Grandmother",
+    "image": "assets/suspects/baka.jpg",
+    "description": "A familiar face with a lifetime of memories and carefully kept secrets.",
+    "visualCharacteristics": [
+      "family",
+      "needlework",
+      "memory"
+    ],
+    "associatedObjects": [
+      "fabric",
+      "heirloom"
+    ],
+    "tags": [
+      "family",
+      "needlework",
+      "memory"
+    ]
+  },
+  {
+    "id": "bibliotekar",
+    "name": "The Librarian",
+    "image": "assets/suspects/bibliotekar.jpg",
+    "description": "A quiet keeper of records who knows where every forgotten story is hidden.",
+    "visualCharacteristics": [
+      "books",
+      "archives",
+      "knowledge"
+    ],
+    "associatedObjects": [
+      "book",
+      "paper"
+    ],
+    "tags": [
+      "books",
+      "archives",
+      "knowledge"
+    ]
+  },
+  {
+    "id": "biznismen",
+    "name": "The Businessman",
+    "image": "assets/suspects/biznismen.jpg",
+    "description": "A wealthy dealmaker accustomed to controlling every room he enters.",
+    "visualCharacteristics": [
+      "wealth",
+      "business",
+      "documents"
+    ],
+    "associatedObjects": [
+      "money",
+      "documents"
+    ],
+    "tags": [
+      "wealth",
+      "business",
+      "documents"
+    ]
+  },
+  {
+    "id": "cuvar-groblja",
+    "name": "The Graveyard Keeper",
+    "image": "assets/suspects/cuvar-groblja.jpg",
+    "description": "A solitary caretaker who spends his nights among old graves and forgotten names.",
+    "visualCharacteristics": [
+      "cemetery",
+      "night",
+      "keys"
+    ],
+    "associatedObjects": [
+      "lantern",
+      "key"
+    ],
+    "tags": [
+      "cemetery",
+      "night",
+      "keys"
+    ]
+  },
+  {
+    "id": "detektiv",
+    "name": "The Detective",
+    "image": "assets/suspects/detektiv.jpg",
+    "description": "An experienced investigator who has spent years studying other people's secrets.",
+    "visualCharacteristics": [
+      "investigation",
+      "magnifier",
+      "case"
+    ],
+    "associatedObjects": [
+      "photograph",
+      "magnifier"
+    ],
+    "tags": [
+      "investigation",
+      "magnifier",
+      "case"
+    ]
+  },
+  {
+    "id": "glumica",
+    "name": "The Actress",
+    "image": "assets/suspects/glumica.jpg",
+    "description": "A celebrated performer whose public persona may hide a very different private life.",
+    "visualCharacteristics": [
+      "theatre",
+      "performance",
+      "jewelry"
+    ],
+    "associatedObjects": [
+      "mask",
+      "jewelry"
+    ],
+    "tags": [
+      "theatre",
+      "performance",
+      "jewelry"
+    ]
+  },
+  {
+    "id": "gost",
+    "name": "The Guest",
+    "image": "assets/suspects/gost.jpg",
+    "description": "A mysterious visitor whose reasons for attending remain unclear.",
+    "visualCharacteristics": [
+      "visitor",
+      "mystery",
+      "travel"
+    ],
+    "associatedObjects": [
+      "invitation",
+      "suitcase"
+    ],
+    "tags": [
+      "visitor",
+      "mystery",
+      "travel"
+    ]
+  },
+  {
+    "id": "klaun",
+    "name": "The Clown",
+    "image": "assets/suspects/klaun.jpg",
+    "description": "An unsettling entertainer whose painted smile reveals very little.",
+    "visualCharacteristics": [
+      "circus",
+      "performance",
+      "makeup"
+    ],
+    "associatedObjects": [
+      "balloon",
+      "makeup"
+    ],
+    "tags": [
+      "circus",
+      "performance",
+      "makeup"
+    ]
+  },
+  {
+    "id": "kondukter",
+    "name": "The Conductor",
+    "image": "assets/suspects/kondukter.jpg",
+    "description": "A railway employee familiar with late departures and unexpected arrivals.",
+    "visualCharacteristics": [
+      "railway",
+      "travel",
+      "tickets"
+    ],
+    "associatedObjects": [
+      "ticket",
+      "watch"
+    ],
+    "tags": [
+      "railway",
+      "travel",
+      "tickets"
+    ]
+  },
+  {
+    "id": "konobar",
+    "name": "The Waiter",
+    "image": "assets/suspects/konobar.jpg",
+    "description": "A discreet server who notices conversations others assume go unheard.",
+    "visualCharacteristics": [
+      "service",
+      "restaurant",
+      "drinks"
+    ],
+    "associatedObjects": [
+      "tray",
+      "glass"
+    ],
+    "tags": [
+      "service",
+      "restaurant",
+      "drinks"
+    ]
+  },
+  {
+    "id": "medicinska-sestra",
+    "name": "The Nurse",
+    "image": "assets/suspects/medicinska-sestra.jpg",
+    "description": "A devoted medical professional with access to private rooms and confidential information.",
+    "visualCharacteristics": [
+      "medicine",
+      "hospital",
+      "care"
+    ],
+    "associatedObjects": [
+      "medicine",
+      "records"
+    ],
+    "tags": [
+      "medicine",
+      "hospital",
+      "care"
+    ]
+  },
+  {
+    "id": "mehanicar",
+    "name": "The Mechanic",
+    "image": "assets/suspects/mehanicar.jpg",
+    "description": "A skilled repairer who understands machines and the marks they leave behind.",
+    "visualCharacteristics": [
+      "machines",
+      "tools",
+      "workshop"
+    ],
+    "associatedObjects": [
+      "wrench",
+      "gear"
+    ],
+    "tags": [
+      "machines",
+      "tools",
+      "workshop"
+    ]
+  },
+  {
+    "id": "novinarka",
+    "name": "The Journalist",
+    "image": "assets/suspects/novinarka.jpg",
+    "description": "A persistent reporter always searching for the story someone wants buried.",
+    "visualCharacteristics": [
+      "journalism",
+      "photography",
+      "news"
+    ],
+    "associatedObjects": [
+      "camera",
+      "notebook"
+    ],
+    "tags": [
+      "journalism",
+      "photography",
+      "news"
+    ]
+  },
+  {
+    "id": "odvjetnik",
+    "name": "The Lawyer",
+    "image": "assets/suspects/odvjetnik.jpg",
+    "description": "A composed legal mind who knows how to use facts, omissions, and fine print.",
+    "visualCharacteristics": [
+      "law",
+      "documents",
+      "justice"
+    ],
+    "associatedObjects": [
+      "briefcase",
+      "paper"
+    ],
+    "tags": [
+      "law",
+      "documents",
+      "justice"
+    ]
+  },
+  {
+    "id": "organizator",
+    "name": "The Organizer",
+    "image": "assets/suspects/organizator.jpg",
+    "description": "A polished host who makes every gathering appear perfectly planned.",
+    "visualCharacteristics": [
+      "events",
+      "planning",
+      "hospitality"
+    ],
+    "associatedObjects": [
+      "schedule",
+      "invitation"
+    ],
+    "tags": [
+      "events",
+      "planning",
+      "hospitality"
+    ]
+  },
+  {
+    "id": "policajac",
+    "name": "The Police Officer",
+    "image": "assets/suspects/policajac.jpg",
+    "description": "A disciplined officer familiar with procedure, evidence, and difficult questions.",
+    "visualCharacteristics": [
+      "police",
+      "investigation",
+      "authority"
+    ],
+    "associatedObjects": [
+      "badge",
+      "notebook"
+    ],
+    "tags": [
+      "police",
+      "investigation",
+      "authority"
+    ]
+  },
+  {
+    "id": "prodavac",
+    "name": "The Shopkeeper",
+    "image": "assets/suspects/prodavac.jpg",
+    "description": "A careful merchant who remembers every customer and every unusual purchase.",
+    "visualCharacteristics": [
+      "trade",
+      "shop",
+      "inventory"
+    ],
+    "associatedObjects": [
+      "ledger",
+      "coins"
+    ],
+    "tags": [
+      "trade",
+      "shop",
+      "inventory"
+    ]
+  },
+  {
+    "id": "slikarka",
+    "name": "The Painter",
+    "image": "assets/suspects/slikarka.jpg",
+    "description": "An observant artist who sees details that most people overlook.",
+    "visualCharacteristics": [
+      "art",
+      "painting",
+      "observation"
+    ],
+    "associatedObjects": [
+      "brush",
+      "canvas"
+    ],
+    "tags": [
+      "art",
+      "painting",
+      "observation"
+    ]
+  },
+  {
+    "id": "sluzavka",
+    "name": "The Maid",
+    "image": "assets/suspects/sluzavka.jpg",
+    "description": "A quiet household worker who knows the rooms and routines of the entire estate.",
+    "visualCharacteristics": [
+      "household",
+      "service",
+      "keys"
+    ],
+    "associatedObjects": [
+      "duster",
+      "key"
+    ],
+    "tags": [
+      "household",
+      "service",
+      "keys"
+    ]
+  },
+  {
+    "id": "stanodavac",
+    "name": "The Landlord",
+    "image": "assets/suspects/stanodavac.jpg",
+    "description": "A property owner with access to every room and a reason to keep tenants close.",
+    "visualCharacteristics": [
+      "property",
+      "ownership",
+      "keys"
+    ],
+    "associatedObjects": [
+      "key",
+      "ledger"
+    ],
+    "tags": [
+      "property",
+      "ownership",
+      "keys"
+    ]
+  },
+  {
+    "id": "vatrogasac",
+    "name": "The Firefighter",
+    "image": "assets/suspects/vatrogasac.jpg",
+    "description": "A brave responder accustomed to danger, urgency, and the aftermath of disasters.",
+    "visualCharacteristics": [
+      "fire",
+      "rescue",
+      "uniform"
+    ],
+    "associatedObjects": [
+      "helmet",
+      "hose"
+    ],
+    "tags": [
+      "fire",
+      "rescue",
+      "uniform"
+    ]
+  },
+  {
+    "id": "vojnik",
+    "name": "The Soldier",
+    "image": "assets/suspects/vojnik.jpg",
+    "description": "A disciplined veteran shaped by duty, order, and a life of difficult decisions.",
+    "visualCharacteristics": [
+      "military",
+      "discipline",
+      "service"
+    ],
+    "associatedObjects": [
+      "medal",
+      "uniform"
+    ],
+    "tags": [
+      "military",
+      "discipline",
+      "service"
+    ]
+  },
+  {
+    "id": "znanstvenik",
+    "name": "The Scientist",
+    "image": "assets/suspects/znanstvenik.jpg",
+    "description": "A meticulous researcher whose experiments raise as many questions as they answer.",
+    "visualCharacteristics": [
+      "science",
+      "research",
+      "laboratory"
+    ],
+    "associatedObjects": [
+      "flask",
+      "notes"
+    ],
+    "tags": [
+      "science",
+      "research",
+      "laboratory"
+    ]
+  }
+]
