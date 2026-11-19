@@ -63,7 +63,7 @@ function privateState(r,p){
     base.secretAssignments=r.players.filter(x=>x.role==="detective").map(x=>({playerId:x.id,name:x.name,color:x.color,killerId:x.killerId,killerName:r.board.find(s=>s.id===x.killerId)?.name,position:r.board.findIndex(s=>s.id===x.killerId)+1,solved:x.solved,connected:x.connected}));
     base.hand=r.ghostHand.map(id=>evidence.find(e=>e.id===id)).filter(Boolean);
   } else {
-    base.myEvidence=p.evidence.map(id=>evidence.find(e=>e.id===id)).filter(Boolean);
+    base.myEvidence=[...new Set(p.evidence||[])].map(id=>evidence.find(e=>e.id===id)).filter(Boolean);
   }
   return base;
 }
@@ -82,9 +82,9 @@ function startRound(r){
   r.distributionPhase=1;
   r.distributionCounts={1:0,2:0};
   r.discardedEvidence=[];
-  // Clear the previous round before drawing, so its cards can be recycled if needed.
+  // Reset round-only choices and distribution counters; Detective evidence is retained.
   r.players.filter(p=>p.role==="detective").forEach(p=>{
-    p.evidence=[];
+    // Evidence is permanent for each Detective for the entire game.
     p.selection=null;
     p.locked=false;
   });
@@ -94,19 +94,22 @@ function startRound(r){
   r.pauseReason="";
 }
 function drawCards(r,n){
-  let out=[];
-  for(let i=0;i<n;i++){
+  const out=[];
+  const target=Math.max(0,Math.floor(Number(n)||0));
+  let safety=0;
+  while(out.length<target && safety++<evidence.length*3){
     if(r.deck.length===0){
-      // Recycle only cards from completed rounds; never cards currently in the Ghost's hand.
+      // Rebuild from cards not held by the Ghost, detectives, or discarded this round.
       const held=new Set(r.ghostHand||[]);
       const circulating=new Set(r.players.flatMap(p=>p.evidence||[]));
       const discarded=new Set(r.discardedEvidence||[]);
       const alreadyDrawn=new Set(out);
       const pool=evidence.map(e=>e.id).filter(id=>!held.has(id)&&!circulating.has(id)&&!discarded.has(id)&&!alreadyDrawn.has(id));
-      if(!pool.length) break;
+      if(!pool.length)break;
       r.deck=shuffle(pool);
     }
-    const id=r.deck.pop(); if(id && !out.includes(id) && !r.ghostHand.includes(id) && !r.players.some(p=>(p.evidence||[]).includes(id))) out.push(id);
+    const id=r.deck.pop();
+    if(id && !out.includes(id) && !r.ghostHand.includes(id) && !r.players.some(p=>(p.evidence||[]).includes(id)))out.push(id);
   }
   return out;
 }
@@ -198,7 +201,7 @@ io.on("connection", socket => {
   });
   socket.on("ghost:finish-distribution",(_,ack=()=>{})=>{
     try{const r=roomFor(socket),p=playerFor(r,socket);if(p.role!=="ghost")throw Error("Only the Ghost can finish distribution.");phaseError(r,"distribute");
-      if(r.distributionCounts[r.distributionPhase]<1)throw Error("Distribute at least one evidence card before finishing this phase.");
+      if(r.distributionCounts[r.distributionPhase]<1 && r.ghostHand.length>0)throw Error("Distribute at least one evidence card before finishing this phase.");
       if(r.distributionPhase===1){r.distributionPhase=2;r.ghostHand=drawCards(r,5);}else{r.phase="select";r.ghostHand=[];}
       broadcast(r);ack({ok:true});
     }catch(e){ack({ok:false,message:e.message});}

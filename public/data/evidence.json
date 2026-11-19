@@ -339,5 +339,27 @@
       "ceramic",
       "table"
     ]
+  },
+  {
+    "id": "ogledalo",
+    "name": "The Mirror",
+    "image": "assets/evidence/ogledalo.jpg",
+    "description": "A mirror left behind, reflecting something that may no longer be there.",
+    "tags": [
+      "mirror",
+      "reflection",
+      "glass"
+    ]
+  },
+  {
+    "id": "uze-i-kljuc",
+    "name": "The Rope and Key",
+    "image": "assets/evidence/uze-i-kljuc.jpg",
+    "description": "A length of rope and a key have been found together.",
+    "tags": [
+      "rope",
+      "key",
+      "metal"
+    ]
   }
 ]

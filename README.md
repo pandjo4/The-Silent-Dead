@@ -41,3 +41,11 @@ npm start
 ```
 
 Then open `http://localhost:3000`.
+
+## Maintenance update (November 2026
+
+- Detective evidence is retained across rounds instead of being cleared at the start of each round.
+- Evidence drawing now skips already-held/discarded cards and continues drawing until it fills the requested hand or no eligible cards remain.
+- Empty evidence phases can be completed if the evidence pool is exhausted, avoiding a stalled game.
+- Added the `ogledalo` and `uze-i-kljuc` evidence entries; their image files are in `public/assets/evidence/`.
+- Added clearer phase guidance in-game and responsive layout/touch adjustments for mobile screens.

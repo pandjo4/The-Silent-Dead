@@ -6,6 +6,7 @@ function showScreen(id){screens.forEach(x=>$(x).classList.toggle("hidden",x!==id
 function toast(msg){const el=$("toast");el.textContent=msg;el.classList.remove("hidden");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.add("hidden"),2800);}
 function connect(){if(socket){if(!socket.connected)socket.connect();return;}socket=io({transports:["websocket","polling"], reconnection:true, reconnectionAttempts:Infinity});socket.on("connect",()=>{$("connection").classList.add("online");$("connection").innerHTML="<i></i> CONNECTED";});socket.on("disconnect",()=>{$("connection").classList.remove("online");$("connection").innerHTML="<i></i> RECONNECTING";});socket.on("game:error",x=>toast(x.message));socket.on("game:state",s=>{
   if(state && s.round!==state.round) { selectedEvidence=null; selectedTarget=null; selectedSuspect=null; }
+  if(s.you?.role==="ghost"){if(selectedEvidence&&!s.hand?.some(c=>c.id===selectedEvidence))selectedEvidence=null;if(selectedTarget&&!s.players?.some(p=>p.id===selectedTarget&&p.role==="detective"&&!p.solved))selectedTarget=null;}
   state=s; render();
 });socket.on("room:removed",()=>{localStorage.removeItem("silentDeadSession");state=null;showScreen("homeScreen");toast("You have been removed from the room.");});}
 function waitForConnection(){if(socket?.connected)return Promise.resolve();return new Promise((resolve,reject)=>{const timer=setTimeout(()=>{cleanup();reject(new Error("Could not connect to the game server. Please try again."));},12000);const ok=()=>{cleanup();resolve();};const fail=()=>{cleanup();reject(new Error("The game server could not be reached."));};function cleanup(){clearTimeout(timer);socket.off("connect",ok);socket.off("connect_error",fail);}socket.once("connect",ok);socket.once("connect_error",fail);});}
@@ -27,7 +28,13 @@ function renderLobby(){ $("lobbyCode").textContent=state.code;$("playerCount").t
 }
 function renderGame(){const me=state.you;const ghost=me.role==="ghost";if(!ghost)selectedSuspect=state.pawns.find(p=>p.playerId===me.id)?.position??null;$("roundLabel").textContent=`${state.round} / ${state.maxRounds}`;$("pauseBanner").classList.toggle("hidden",!state.paused);$("pauseText").textContent=state.pauseReason||"Waiting for reconnection…";
  $("phaseEyebrow").textContent=state.phase==="distribute"?"THE GHOST LEAVES SIGNS":state.phase==="select"?"THE DETECTIVES MUST CHOOSE":"THE TRUTH EMERGES";
- $("phaseTitle").textContent=state.phase==="distribute"?"The evidence":state.phase==="select"?"Choose a face": "The reveal";
+ $("phaseTitle").textContent=state.phase==="distribute"?"Evidence distribution":state.phase==="select"?"Choose a face": "The reveal";
+ const guide=$("phaseGuide");
+ if(state.phase==="distribute"){
+   if(ghost){const d=state.distribution;const empty=state.hand.length===0;guide.innerHTML=`<strong>GHOST PHASE ${d.phase} OF 2</strong><span>${empty?"No cards remain in this hand. Finish this phase to continue.":d.phase===1?"Send at least one clue to begin the first phase.":"Send clues from your second hand. Finish to begin detective choices."} ${d.counts[d.phase]} sent this phase.</span>`;}
+   else guide.innerHTML=`<strong>WAITING FOR THE GHOST · PHASE ${state.distribution.phase} OF 2</strong><span>Study your case evidence as it arrives. The Ghost must finish both evidence phases before you can choose a suspect.</span>`;
+ } else if(state.phase==="select") guide.innerHTML=`<strong>DETECTIVE DECISION PHASE</strong><span>Choose one suspect and lock your choice. The reveal begins after every unsolved detective has locked in.</span>`;
+ else guide.innerHTML=`<strong>ROUND ${state.round} REVEAL</strong><span>Review everyone's result. The host can begin the next round when ready.</span>`;
  $("suspectBoard").innerHTML=state.board.map(s=>{const pawns=state.pawns.filter(p=>p.position===s.position&&!p.solved);const mine=selectedSuspect===s.position;return `<button class="suspect-card ${mine?"selected":""} ${s.eliminated?"eliminated":""}" data-pos="${s.position}" ${(!ghost&&state.phase==="select"&&!s.eliminated&&!me.solved&&!state.paused&&!state.pawns.find(p=>p.playerId===me.id)?.locked)?"":"disabled"}><span class="suspect-number">${String(s.position).padStart(2,"0")}</span><img src="${asset(s.image)}" onerror="this.onerror=null;this.src='assets/evidence/placeholder.svg'"><div class="suspect-name">${esc(s.name)}</div><div class="pawn-stack">${pawns.map(p=>`<i class="pawn-dot" style="background:${p.color}" title="${esc(p.name)}"></i>`).join("")}</div></button>`;}).join("");
  $("suspectBoard").querySelectorAll("[data-pos]").forEach(b=>b.onclick=()=>{selectedSuspect=Number(b.dataset.pos);emit("detective:select",{position:selectedSuspect});});
  $("pawnLegend").innerHTML=state.players.filter(p=>p.role==="detective").map(p=>`<span class="legend-item"><i class="legend-dot" style="background:${p.color}"></i>${esc(p.name)}${p.solved?" · SOLVED":""}</span>`).join("");
@@ -37,7 +44,7 @@ function renderGame(){const me=state.you;const ghost=me.role==="ghost";if(!ghost
  if(ghost)renderGhost();else renderDetective();
 }
 function renderGhost(){const dist=state.distribution;$("handCount").textContent=`${state.hand.length} CARDS`;$("shuffleCount").textContent=`${dist.shuffleRemaining} LEFT`;
- $("ghostHand").innerHTML=state.hand.map(c=>`<button class="evidence-card ${selectedEvidence===c.id?"selected":""}" data-card="${c.id}"><img src="${asset(c.image)}" onerror="this.onerror=null;this.src='assets/evidence/placeholder.svg'"><strong>${esc(c.name)}</strong></button>`).join("");
+ $("ghostHand").innerHTML=state.hand.map(c=>`<button class="evidence-card ${selectedEvidence===c.id?"selected":""}" data-card="${c.id}"><img src="${asset(c.image)}" onerror="this.onerror=null;this.src='assets/evidence/placeholder.svg'"><strong>${esc(c.name)}</strong></button>`).join("")||`<p class="hint">No cards remain in this hand. Finish this phase to continue.</p>`;
  $("ghostHand").querySelectorAll("[data-card]").forEach(b=>b.onclick=()=>{selectedEvidence=b.dataset.card;renderGhost();});
  $("targetList").innerHTML=`<div class="target-buttons">${state.players.filter(p=>p.role==="detective"&&!p.solved).map(p=>`<button class="target-btn ${selectedTarget===p.id?"active":""}" data-target="${p.id}" style="border-left:3px solid ${p.color}">${esc(p.name)}</button>`).join("")}</div>`;
  $("targetList").querySelectorAll("[data-target]").forEach(b=>b.onclick=()=>{selectedTarget=b.dataset.target;renderGhost();});
@@ -45,16 +52,16 @@ function renderGhost(){const dist=state.distribution;$("handCount").textContent=
  $("sendEvidence").disabled=!selectedEvidence||!selectedTarget||state.phase!=="distribute"||state.paused;
  $("sendEvidence").onclick=()=>selectedEvidence&&distribute(selectedEvidence);
  $("ghostHand").querySelectorAll(".evidence-card").forEach(b=>b.ondblclick=()=>distribute(b.dataset.card));
- $("shuffleBtn").disabled=dist.shuffleRemaining<=0||state.phase!=="distribute"||state.paused;
- $("finishDistribution").disabled=state.phase!=="distribute"||state.paused||dist.counts[dist.phase]<1;
- $("distributionHint").textContent=`Phase ${dist.phase} of 2 · ${dist.counts[dist.phase]} card(s) distributed. Select a card and a detective, then press Send Evidence.`;
+ $("shuffleBtn").disabled=dist.shuffleRemaining<=0||state.hand.length===0||state.phase!=="distribute"||state.paused;
+ $("finishDistribution").disabled=state.phase!=="distribute"||state.paused||(dist.counts[dist.phase]<1&&state.hand.length>0);
+ $("distributionHint").textContent=`Phase ${dist.phase} of 2 · ${dist.counts[dist.phase]} card(s) sent. Select a card and detective, then press Send Evidence. Finish this phase to draw the next hand.`;
  $("finishDistribution").textContent=dist.phase===1?"FINISH FIRST PHASE  ↗":"FINISH DISTRIBUTION  ↗";
  const ass=state.secretAssignments||[];$("secretAssignments").innerHTML=ass.map(a=>`<div class="secret-row"><span style="color:${a.color}">${esc(a.name)}</span><small>${esc(a.killerName)} · #${a.position} · ${a.solved?"SOLVED":"UNSOLVED"}</small></div>`).join("");
 }
 async function distribute(cardId){const targetId=selectedTarget;if(!targetId){toast("Choose a detective first.");return;}const res=await emit("ghost:distribute",{cardId,targetId});if(res.ok){selectedEvidence=null;toast("Evidence delivered in silence.");}}
 function renderDetective(){const p=state.pawns.find(x=>x.playerId===state.you.id);selectedSuspect=p?.position||null;$("myEvidenceCount").textContent=`${state.myEvidence.length} CARDS`;$("myEvidence").innerHTML=state.myEvidence.map(c=>`<div class="evidence-display"><img src="${asset(c.image)}" onerror="this.onerror=null;this.src='assets/evidence/placeholder.svg'"><strong>${esc(c.name)}</strong><p>${esc(c.description||"A clue from beyond.")}</p></div>`).join("")||`<p class="hint">No evidence has reached you yet.</p>`;
  $("caseStatus").innerHTML=p?.locked?"CHOICE LOCKED <span>◈</span>": "CASE UNSOLVED <span>●</span>";
- $("selectionHint").textContent=state.phase==="distribute"?"The Ghost is still distributing evidence. Study what you have received.":p?.locked?"Your choice is locked. Waiting for the others.":"Select a suspect on the board, then lock your choice.";
+ $("selectionHint").textContent=state.phase==="distribute"?"The Ghost is still distributing evidence. Your case evidence stays with you across rounds.":p?.locked?"Your choice is locked. Waiting for the others.":"Select a suspect on the board, then lock your choice.";
  $("lockSelection").disabled=state.phase!=="select"||!p?.position||p.locked||state.paused;$("lockSelection").textContent=p?.locked?"CHOICE LOCKED":"LOCK MY CHOICE  ↗";
 }
 function renderReveal(){const el=$("revealArea");if(state.phase!=="reveal"){el.classList.add("hidden");return;}el.classList.remove("hidden");el.innerHTML=`<h3>The veil is lifted</h3>${(state.reveal||[]).map(x=>`<div class="reveal-row"><i class="legend-dot" style="background:${x.color}"></i><span>${esc(x.name)}</span><span class="reveal-mark ${x.correct?"correct":"incorrect"}">${x.correct?"CASE SOLVED":"NOT THIS TIME"}</span></div>`).join("")}${state.you.isAdmin?`<button id="nextRound" class="primary-btn">${state.round>=state.maxRounds?"VIEW FINAL TESTIMONY":"BEGIN NEXT ROUND"} ↗</button>`:`<p class="hint">Waiting for the host to continue…</p>`}`;

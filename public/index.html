@@ -14,19 +14,20 @@
 </section>
 <section id="gameScreen" class="screen hidden">
   <div class="game-head"><div><div class="eyebrow" id="phaseEyebrow">THE INVESTIGATION BEGINS</div><h2 id="phaseTitle">The evidence</h2></div><div class="round-chip"><small>ROUND</small><strong id="roundLabel">1 / 4</strong></div></div>
+  <div id="phaseGuide" class="phase-guide" role="status"></div>
   <div id="pauseBanner" class="pause-banner hidden">◌ <span id="pauseText">Waiting for a player to reconnect…</span></div>
   <div class="game-layout"><section class="board-column"><div class="board-topline"><span>THE NINE SUSPECTS</span><span>THEIR FACES WILL NOT CHANGE</span></div><div id="suspectBoard" class="suspect-board"></div><div id="pawnLegend" class="pawn-legend"></div><div id="revealArea" class="reveal-area hidden"></div></section>
   <aside class="side-column"><div id="ghostPanel" class="panel role-panel hidden">
       <div class="role-tag ghost-tag">✦ THE GHOST</div><h3>You know who did it.</h3><p class="role-copy">Do not speak. Do not type. Let the evidence guide them.</p>
       <button id="secretToggle" class="secret-toggle">REVEAL SECRET ASSIGNMENTS <span>＋</span></button><div id="secretAssignments" class="secret-list hidden"></div>
-      <div class="divider"></div><div class="panel-heading"><span>YOUR EVIDENCE</span><small id="handCount">5 CARDS</small></div><div id="ghostHand" class="ghost-hand"></div>
+      <div class="divider"></div><div class="panel-heading"><span>GHOST HAND</span><small id="handCount">5 CARDS</small></div><div id="ghostHand" class="ghost-hand"></div>
       <div class="distribution-targets"><label>GIVE SELECTED CARD TO</label><div id="targetList"></div></div>
       <button id="sendEvidence" class="secondary-btn" disabled>SEND SELECTED EVIDENCE</button>
       <div class="shuffle-row"><button id="shuffleBtn" class="secondary-btn">↻ SHUFFLE <span id="shuffleCount">3 / 3</span></button></div>
       <button id="finishDistribution" class="primary-btn">FINISH PHASE <span>↗</span></button>
       <p class="hint" id="distributionHint">Give at least one card to an active detective.</p>
     </div>
-    <div id="detectivePanel" class="panel role-panel hidden"><div class="role-tag detective-tag">◈ THE DETECTIVE</div><h3>The clues are yours.</h3><p class="role-copy">Study your evidence. Discuss what you see. Choose the face you believe the Ghost is pointing toward.</p><div class="panel-heading"><span>YOUR EVIDENCE</span><small id="myEvidenceCount">0 CARDS</small></div><div id="myEvidence" class="my-evidence"></div><div class="case-status" id="caseStatus">CASE UNSOLVED <span>●</span></div><p class="hint" id="selectionHint">Select a suspect on the board, then lock your choice.</p><button id="lockSelection" class="primary-btn">LOCK MY CHOICE <span>↗</span></button></div>
+    <div id="detectivePanel" class="panel role-panel hidden"><div class="role-tag detective-tag">◈ THE DETECTIVE</div><h3>The clues are yours.</h3><p class="role-copy">Study your evidence. Discuss what you see. Choose the face you believe the Ghost is pointing toward.</p><div class="panel-heading"><span>YOUR CASE EVIDENCE</span><small id="myEvidenceCount">0 CARDS</small></div><p class="hint evidence-persistence">Evidence you receive stays in your case for every round.</p><div id="myEvidence" class="my-evidence"></div><div class="case-status" id="caseStatus">CASE UNSOLVED <span>●</span></div><p class="hint" id="selectionHint">Select a suspect on the board, then lock your choice.</p><button id="lockSelection" class="primary-btn">LOCK MY CHOICE <span>↗</span></button></div>
     <div id="waitingPanel" class="panel role-panel hidden"><div class="role-tag">◌ OBSERVER</div><h3>Watch the signs.</h3><p class="role-copy">Your case is solved. You may watch the remaining detectives continue.</p></div>
     <div class="panel status-panel"><div class="panel-heading"><span>CASE STATUS</span><span class="live-dot">● LIVE</span></div><div id="statusList"></div><div class="divider"></div><div class="sound-control"><span>ATMOSPHERE</span><button id="ambientToggle" class="text-btn">SOUND OFF</button></div></div>
   </aside></div>
