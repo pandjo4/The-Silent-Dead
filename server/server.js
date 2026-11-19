@@ -162,7 +162,9 @@ io.on("connection", socket => {
       p.socketId=socket.id;p.connected=true;
       if(r.cleanupTimer){clearTimeout(r.cleanupTimer);r.cleanupTimer=null;}
       socket.data.room=r.code;socket.data.playerId=p.id;
-      if(r.phase!=="lobby" && p.role==="ghost" && r.paused){r.paused=false;r.pauseReason="";} else if(r.paused && r.players.filter(x=>!x.connected).length===0){r.paused=false;r.pauseReason="";}
+      // Resume only after every player has reconnected. A Ghost reconnecting must
+      // not unpause the room while another Detective is still offline.
+      if(r.paused && r.players.every(x=>x.connected)){r.paused=false;r.pauseReason="";}
       ack({ok:true,code:r.code,playerId:p.id,token:p.token,state:privateState(r,p)});broadcast(r);
     }catch(e){ack({ok:false,message:e.message});}
   });
@@ -182,6 +184,7 @@ io.on("connection", socket => {
   });
   socket.on("game:start",(_,ack=()=>{})=>{
     try{const r=roomFor(socket),p=playerFor(r,socket);if(p.id!==r.adminId)throw Error("Only the admin can start.");if(r.phase!=="lobby")throw Error("Game already started.");if(r.players.length<2)throw Error("At least two players are required.");if(!r.ghostId||!r.players.some(x=>x.id===r.ghostId))throw Error("Select exactly one Ghost.");
+      if(r.players.some(x=>!x.connected)) throw Error("Every player must be connected before the game can start.");
       createGame(r);broadcast(r);ack({ok:true});
     }catch(e){ack({ok:false,message:e.message});}
   });

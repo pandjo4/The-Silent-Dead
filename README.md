@@ -16,6 +16,8 @@ You can also create a Render **Web Service** manually:
 - Start Command: `cd server && npm start`
 - Health Check Path: `/health`
 
+**Important:** Do not use plain `npm install` / `npm start` with a blank Root Directory. The `package.json` is inside `server/`, not at the repository root. If you use plain `npm install` / `npm start`, Render will look for `/package.json` and fail with `ENOENT`. Keep Root Directory blank because the server also serves the sibling `public/` folder.
+
 The frontend is served from `public/` by Express. Socket.IO connects to the same origin automatically; there is no separate frontend host or hard-coded Render URL.
 
 ## Game settings
