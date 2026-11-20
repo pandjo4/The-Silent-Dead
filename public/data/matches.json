@@ -1,0 +1,255 @@
+{
+ "_note": "Maps every evidence card to the suspect ids whose portrait visibly contains that object. Used only to deal playable hands (>=2 useful, <=1 fits-nobody, <=1 fits-everybody per hand). 'omni' cards fit almost everyone. Edit freely; unknown ids only log a warning.",
+ "omni": [
+  "12-papir",
+  "fenjer-na-zidu"
+ ],
+ "cards": {
+  "aktovka": [
+   "gost",
+   "kondukter",
+   "medicinska-sestra",
+   "novinarka",
+   "odvjetnik"
+  ],
+  "bocica-i-slova": [
+   "konobar",
+   "lugar",
+   "medicinska-sestra",
+   "odvjetnik",
+   "slikarka",
+   "sluzavka",
+   "znanstvenik"
+  ],
+  "cekic": [
+   "konobar",
+   "mehanicar",
+   "odvjetnik",
+   "stanodavac"
+  ],
+  "cigareta": [
+   "arhitektica",
+   "biznismen",
+   "cuvar-groblja",
+   "sluzavka",
+   "vatrogasac"
+  ],
+  "cizme-i-blato": [
+   "arhitektica",
+   "cuvar-groblja",
+   "lugar",
+   "vatrogasac",
+   "vojnik"
+  ],
+  "cudoviste-i-fenjer": [
+   "cuvar-groblja"
+  ],
+  "cvijet-na-ploci": [
+   "glumica",
+   "organizator",
+   "svecenik"
+  ],
+  "daske": [],
+  "duga": [
+   "lugar"
+  ],
+  "dzepni-sat": [
+   "cuvar-groblja",
+   "detektiv",
+   "gost",
+   "klaun",
+   "kondukter",
+   "medicinska-sestra",
+   "vojnik"
+  ],
+  "fenjer-na-zidu": [
+   "baka",
+   "bibliotekar",
+   "cuvar-groblja",
+   "glumica",
+   "gost",
+   "kondukter",
+   "konobar",
+   "mehanicar",
+   "odvjetnik",
+   "organizator",
+   "sluzavka",
+   "stanodavac",
+   "vatrogasac"
+  ],
+  "flasa": [
+   "arhitektica",
+   "cuvar-groblja",
+   "gost",
+   "konobar",
+   "svecenik"
+  ],
+  "flaster": [
+   "medicinska-sestra"
+  ],
+  "igrace-karte": [
+   "klaun",
+   "konobar"
+  ],
+  "kacket-i-lizalo": [
+   "klaun"
+  ],
+  "kamera": [
+   "detektiv",
+   "novinarka"
+  ],
+  "knjiga-racuna": [
+   "bibliotekar",
+   "biznismen",
+   "cuvar-groblja",
+   "glumica",
+   "konobar",
+   "odvjetnik",
+   "organizator",
+   "prodavac",
+   "slikarka",
+   "stanodavac"
+  ],
+  "kompas-i-mapa": [
+   "arhitektica",
+   "gost",
+   "kondukter",
+   "stanodavac",
+   "vojnik"
+  ],
+  "kostur": [
+   "znanstvenik"
+  ],
+  "led": [
+   "konobar"
+  ],
+  "limena-kutija": [
+   "biznismen",
+   "glumica",
+   "prodavac",
+   "slikarka",
+   "stanodavac",
+   "svecenik"
+  ],
+  "lisice-i-knjige": [
+   "bibliotekar",
+   "kondukter",
+   "lugar",
+   "odvjetnik",
+   "policajac",
+   "slikarka",
+   "svecenik",
+   "znanstvenik"
+  ],
+  "mac": [
+   "lugar",
+   "vojnik"
+  ],
+  "mikrofon": [
+   "glumica",
+   "novinarka"
+  ],
+  "novine": [
+   "detektiv",
+   "glumica",
+   "kondukter",
+   "novinarka",
+   "stanodavac",
+   "vatrogasac"
+  ],
+  "odvijac-i-sendvic": [
+   "arhitektica",
+   "mehanicar",
+   "stanodavac"
+  ],
+  "ogledalo": [
+   "biznismen",
+   "glumica",
+   "klaun"
+  ],
+  "pancir": [
+   "vojnik"
+  ],
+  "perika-i-sprej": [
+   "glumica",
+   "klaun"
+  ],
+  "pismo-i-casa": [
+   "glumica",
+   "gost",
+   "konobar",
+   "novinarka",
+   "odvjetnik",
+   "policajac",
+   "svecenik"
+  ],
+  "pistaljka-i-lopta": [
+   "policajac"
+  ],
+  "ploca-s-slikama": [
+   "detektiv",
+   "glumica",
+   "novinarka",
+   "policajac"
+  ],
+  "radio": [
+   "arhitektica",
+   "baka",
+   "mehanicar",
+   "novinarka"
+  ],
+  "rukavice": [
+   "arhitektica",
+   "biznismen",
+   "gost",
+   "konobar",
+   "organizator",
+   "vatrogasac"
+  ],
+  "sal-i-meci": [
+   "baka",
+   "vojnik"
+  ],
+  "skrinja-s-blagom": [
+   "biznismen",
+   "prodavac",
+   "svecenik"
+  ],
+  "skrivena-jaja": [],
+  "sos": [
+   "svecenik"
+  ],
+  "tanjir": [
+   "biznismen",
+   "sluzavka",
+   "svecenik"
+  ],
+  "uze-i-kljuc": [
+   "cuvar-groblja",
+   "detektiv",
+   "kondukter",
+   "lugar",
+   "organizator",
+   "sluzavka",
+   "stanodavac",
+   "svecenik",
+   "vatrogasac"
+  ],
+  "vuk-i-naocale": [
+   "baka",
+   "bibliotekar",
+   "lugar",
+   "odvjetnik",
+   "prodavac",
+   "stanodavac",
+   "znanstvenik"
+  ],
+  "znacka": [
+   "kondukter",
+   "medicinska-sestra",
+   "policajac",
+   "vatrogasac",
+   "vojnik"
+  ]
+ }
+}

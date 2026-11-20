@@ -357,6 +357,9 @@ function renderBoard(ghost, me, myPawn) {
     },
     (el, s) => {
       const cleared = !!s.solvedBy;
+      // Elements are reused between games (rematch) -> position and number badge must be refreshed every render.
+      el.dataset.pos = s.position;
+      setText(el.querySelector(".suspect-number"), String(s.position).padStart(2, "0"));
       toggle(el, "selected", pick === s.position);
       toggle(el, "locked", pick === s.position && locked);
       toggle(el, "eliminated", cleared);
@@ -595,7 +598,10 @@ function onBoardActivate(e) {
   if (!activate(e)) return;
   const card = e.target.closest(".suspect-card"); if (!card || !state) return;
   if (e.type === "keydown") e.preventDefault();
-  const me = state.you, pos = Number(card.dataset.pos);
+  const me = state.you;
+  const suspectId = card.dataset.key; // the suspect's id is the source of truth, not a cached number
+  const pos = state.board.findIndex((b) => b.id === suspectId) + 1;
+  if (!pos) return;
   if (me.role === "ghost") return;
   if (state.phase !== "select") { toast(state.phase === "distribute" ? "Wait for the Ghost to finish giving clues." : "The guessing is over for this round."); return; }
   if (me.solved) { toast("Your case is already solved."); return; }
@@ -605,7 +611,7 @@ function onBoardActivate(e) {
   const s = state.board[pos - 1];
   if (s.solvedBy) { toast("That suspect was already cleared by another detective."); return; }
   localPick = pos; render();
-  emit("detective:select", { position: pos }).then((res) => { if (!res.ok && localPick === pos) { localPick = null; render(); } });
+  emit("detective:select", { position: pos, suspectId }).then((res) => { if (!res.ok && localPick === pos) { localPick = null; render(); } });
 }
 $("suspectBoard").addEventListener("click", onBoardActivate);
 $("suspectBoard").addEventListener("keydown", onBoardActivate);
@@ -613,7 +619,7 @@ $("suspectBoard").addEventListener("keydown", onBoardActivate);
 $("lockBtn").addEventListener("click", () => guarded(async () => {
   const pawn = state.pawns.find((p) => p.playerId === state.you.id);
   if (pawn && pawn.locked) { await emit("detective:unlock"); return; }
-  if (localPick && (!pawn || pawn.position !== localPick)) await emit("detective:select", { position: localPick });
+  if (localPick && (!pawn || pawn.position !== localPick)) await emit("detective:select", { position: localPick, suspectId: state.board[localPick - 1]?.id });
   await emit("detective:lock");
 }));
 

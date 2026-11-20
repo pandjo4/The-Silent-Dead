@@ -46,6 +46,11 @@
       return s;
     });
 
+    // Optional card->suspect fit table (public/data/matches.json). Without it, hands are plain random.
+    const matches = opts.matches && opts.matches.cards ? opts.matches : null;
+    const omni = new Set((matches && matches.omni) || []);
+    const MIN_USEFUL = 2, MAX_DEAD = 1, MAX_BROAD = 1; // per hand
+
     const rooms = new Map();
     const sessions = new Map(); // socketId -> { code, playerId }
     const evidenceById = new Map(evidence.map((e) => [e.id, e]));
@@ -99,7 +104,37 @@
       const deck = deckIds(r);
       const fresh = shuffle(deck.filter((id) => !prev.has(id)));
       const old = shuffle(deck.filter((id) => prev.has(id)));
-      return fresh.concat(old).slice(0, HAND_SIZE);
+      const pool = fresh.concat(old);
+      return matches && r.board && r.board.length ? balancedHand(r, pool) : pool.slice(0, HAND_SIZE);
+    }
+
+    /**
+     * Picks HAND_SIZE cards from `pool` (already ordered by preference) so that the hand is playable:
+     *  - at least MIN_USEFUL cards fit a culprit of a detective who is still investigating,
+     *  - at most MAX_DEAD cards fit nobody on this board, at most MAX_BROAD fit (almost) everybody.
+     * If the pool cannot satisfy the rules it simply falls back to the best it can do.
+     */
+    function balancedHand(r, pool) {
+      const boardIds = new Set(r.board.map((s) => s.id));
+      const killers = new Set(activeDetectives(r).map((p) => p.killerId));
+      const fit = (id) => (omni.has(id) ? boardIds.size : (matches.cards[id] || []).filter((sid) => boardIds.has(sid)).length);
+      const kind = (id) => { const f = fit(id); return f === 0 ? "dead" : (omni.has(id) || f >= 6) ? "broad" : "good"; };
+      const useful = (id) => kind(id) === "good" && (matches.cards[id] || []).some((sid) => killers.has(sid));
+      const hand = [];
+      const take = (id) => { hand.push(id); };
+      for (const id of pool) { if (hand.length >= MIN_USEFUL) break; if (useful(id)) take(id); }
+      let dead = 0, broad = 0;
+      for (const id of pool) {
+        if (hand.length >= HAND_SIZE) break;
+        if (hand.includes(id)) continue;
+        const k = kind(id);
+        if (k === "dead" && dead >= MAX_DEAD) continue;
+        if (k === "broad" && broad >= MAX_BROAD) continue;
+        if (k === "dead") dead++; if (k === "broad") broad++;
+        take(id);
+      }
+      for (const id of pool) { if (hand.length >= HAND_SIZE) break; if (!hand.includes(id)) take(id); } // pool too small: fill up
+      return shuffle(hand);
     }
 
     /* ---------- state projection ---------- */
@@ -483,7 +518,9 @@
         if (p.role !== "detective" || p.solved || p.dropped) fail("You cannot choose a suspect right now.");
         needPhase(r, "select");
         if (p.locked) fail("Your choice is locked. Press “Change choice” first.");
-        const pos = Number(payload.position);
+        let pos = Number(payload.position);
+        // The suspect id (when sent) wins over the number: a client with a stale board can never pick the wrong face.
+        if (typeof payload.suspectId === "string") { const i = r.board.findIndex((b) => b.id === payload.suspectId); if (i >= 0) pos = i + 1; }
         if (!Number.isInteger(pos) || pos < 1 || pos > BOARD_SIZE) fail("Choose a suspect from 1 to 9.");
         const s = r.board[pos - 1];
         if (detectives(r).some((x) => x.solved && x.killerId === s.id)) fail("That suspect has already been cleared by another detective.");

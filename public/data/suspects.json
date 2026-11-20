@@ -478,5 +478,49 @@
       "research",
       "laboratory"
     ]
+  },
+  {
+    "id": "lugar",
+    "name": "The Gamekeeper",
+    "image": "assets/suspects/lugar.jpg",
+    "description": "A weathered warden of the forest who knows every path, trap and nest, and what the woods prefer to keep quiet.",
+    "visualCharacteristics": [
+      "forest",
+      "hunting",
+      "night patrol"
+    ],
+    "associatedObjects": [
+      "rope",
+      "knife",
+      "boots",
+      "antlers"
+    ],
+    "tags": [
+      "forest",
+      "hunting",
+      "nature"
+    ]
+  },
+  {
+    "id": "svecenik",
+    "name": "The Priest",
+    "image": "assets/suspects/svecenik.jpg",
+    "description": "A quiet shepherd of a failing parish who hears every confession and repeats none of them.",
+    "visualCharacteristics": [
+      "faith",
+      "confession",
+      "church"
+    ],
+    "associatedObjects": [
+      "chalice",
+      "bible",
+      "bell rope",
+      "candles"
+    ],
+    "tags": [
+      "faith",
+      "church",
+      "confession"
+    ]
   }
 ]

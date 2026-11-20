@@ -25,8 +25,9 @@ function loadDatabase(file, label) {
     const rel = typeof item.image === "string" ? item.image.replace(/^\/+/, "") : "";
     const abs = path.resolve(PUBLIC_DIR, rel);
     if (!rel || !abs.startsWith(PUBLIC_DIR + path.sep) || !fs.existsSync(abs)) {
-      console.warn(`[${label}] image missing for "${item.id}" (${item.image}) - using placeholder`);
-      entry.image = PLACEHOLDER;
+      // Not playable without a picture: skip it (the game stays fine, add the image later and redeploy).
+      console.warn(`[${label}] SKIPPED "${item.id}": image file not found (${item.image}). Names are case-sensitive on Render.`);
+      continue;
     } else entry.image = rel;
     out.push(entry);
   }
@@ -36,6 +37,18 @@ function loadDatabase(file, label) {
 const suspects = loadDatabase("suspects.json", "Suspects");
 const evidence = loadDatabase("evidence.json", "Evidence");
 
+/** Optional card -> suspect fit table used to deal playable hands. Unknown ids only produce a warning. */
+let matches = null;
+try {
+  matches = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "matches.json"), "utf8"));
+  const ev = new Set(evidence.map((e) => e.id)), su = new Set(suspects.map((x) => x.id));
+  for (const [cid, list] of Object.entries(matches.cards || {})) {
+    if (!ev.has(cid)) console.warn(`[matches] unknown evidence id "${cid}"`);
+    for (const sid of list) if (!su.has(sid)) console.warn(`[matches] unknown suspect id "${sid}" on card "${cid}"`);
+  }
+  for (const e of evidence) if (!(matches.cards || {})[e.id] && !(matches.omni || []).includes(e.id)) console.warn(`[matches] evidence "${e.id}" has no entry (treated as fitting nobody)`);
+} catch (e) { console.warn("[matches] matches.json not loaded - hands will be plain random:", e.message); }
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { pingInterval: 20000, pingTimeout: 25000 });
@@ -43,6 +56,7 @@ const io = new Server(server, { pingInterval: 20000, pingTimeout: 25000 });
 const hub = createHub({
   suspects,
   evidence,
+  matches,
   uid: () => crypto.randomBytes(16).toString("hex"),
   random: () => crypto.randomInt(0, 2 ** 30) / 2 ** 30,
   send: (socketId, event, data) => io.to(socketId).emit(event, data),

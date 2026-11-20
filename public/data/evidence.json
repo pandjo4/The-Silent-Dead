@@ -4,80 +4,79 @@
     "name": "The Muddy Boots",
     "image": "assets/evidence/cizme-i-blato.jpg",
     "description": "A pair of mud-caked boots stands by a door, a trail of dark footprints leading away.",
-    "tags": ["boots", "mud", "footprints"]
+    "tags": [
+      "boots",
+      "mud",
+      "footprints"
+    ]
   },
   {
     "id": "vuk-i-naocale",
     "name": "The Cracked Spectacles on Wolf",
     "image": "assets/evidence/naocale.jpg",
     "description": "A pair of spectacles with one cracked lens lies on wolf.",
-    "tags": ["spectacles", "glass", "animal", "reading"]
+    "tags": [
+      "spectacles",
+      "glass",
+      "animal",
+      "reading"
+    ]
   },
   {
     "id": "bocica-i-slova",
     "name": "The Brown Bottle",
     "image": "assets/evidence/bocica-i-kasika.jpg",
     "description": "A small apothecary bottle and few bloody letters.",
-    "tags": ["bottle", "medicine", "poison"]
+    "tags": [
+      "bottle",
+      "medicine",
+      "poison"
+    ]
   },
   {
     "id": "kompas-i-mapa",
     "name": "The Compass and Map",
     "image": "assets/evidence/kompas-i-karta.jpg",
     "description": "A brass compass rests on a torn map marked by hand.",
-    "tags": ["compass", "map", "travel"]
+    "tags": [
+      "compass",
+      "map",
+      "travel"
+    ]
   },
   {
     "id": "radio",
     "name": "The Old Radio",
     "image": "assets/evidence/radio.jpg",
     "description": "An old radio with its back panel open and its wires pulled loose.",
-    "tags": ["radio", "wires", "sound"]
+    "tags": [
+      "radio",
+      "wires",
+      "sound"
+    ]
   },
   {
     "id": "novine",
     "name": "The Newspaper Clipping",
     "image": "assets/evidence/novine.jpg",
     "description": "A yellowed newspaper page with one headline circled in pencil.",
-    "tags": ["newspaper", "headline", "paper"]
+    "tags": [
+      "newspaper",
+      "headline",
+      "paper"
+    ]
   },
   {
     "id": "knjiga-racuna",
     "name": "The Ledger",
     "image": "assets/evidence/knjiga-racuna.jpg",
     "description": "A ledger lies open at a page with one entry torn out.",
-    "tags": ["ledger", "accounts", "book"]
+    "tags": [
+      "ledger",
+      "accounts",
+      "book"
+    ]
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   {
     "id": "12-papir",
     "name": "The Torn Page",
@@ -439,6 +438,39 @@
       "rope",
       "key",
       "metal"
+    ]
+  },
+  {
+    "id": "znacka",
+    "name": "The Tarnished Badge",
+    "image": "assets/evidence/znacka.jpg",
+    "description": "A tarnished badge and a set of dog tags lie tangled on a chain.",
+    "tags": [
+      "badge",
+      "dog tags",
+      "metal"
+    ]
+  },
+  {
+    "id": "flasa",
+    "name": "The Dented Flask",
+    "image": "assets/evidence/flasa.jpg",
+    "description": "A dented hip flask lies on its side, a dark stain spreading from its open cap.",
+    "tags": [
+      "flask",
+      "drink",
+      "metal"
+    ]
+  },
+  {
+    "id": "limena-kutija",
+    "name": "The Tin Box",
+    "image": "assets/evidence/limena-kutija.jpg",
+    "description": "A dented tin box with a broken lock, something small rattling inside.",
+    "tags": [
+      "box",
+      "tin",
+      "lock"
     ]
   }
 ]

@@ -274,4 +274,47 @@ test("fuzz: invariants hold over 300 random games", () => {
   }
 });
 
+
+const matches = require(path.join(__dirname, "..", "public", "data", "matches.json"));
+
+test("suspect id beats a stale position number (lock-in bug)", () => {
+  const g = setup(3); startGame(g, 0);
+  const i = detIdx(g)[0];
+  assert(g.call(0, "ghost:give", { targetId: g.room.players[i].id, cardIds: [g.room.ghostHand[0]] }).ok);
+  assert(g.call(0, "ghost:end-clues").ok);
+  const target = g.room.board[4];
+  assert(g.call(i, "detective:select", { position: 1, suspectId: target.id }).ok); // client thinks it is #1, but tapped suspect is #5
+  assert.strictEqual(g.room.players[i].selection, 5);
+  assert(g.call(i, "detective:lock").ok);
+  assert(g.call(i, "detective:unlock").ok);
+  assert(g.call(i, "detective:select", { position: 2 }).ok); // old clients without suspectId still work
+  assert.strictEqual(g.room.players[i].selection, 2);
+});
+
+test("balanced hands: >=2 useful, <=1 fits-nobody, <=1 fits-everybody", () => {
+  let hands = 0;
+  for (let n = 0; n < 300; n++) {
+    const hub = createHub({ evidence, suspects, matches, send: () => {} });
+    const a = hub.handle("a", "room:create", { name: "A" });
+    hub.handle("b", "room:join", { name: "B", code: a.code });
+    hub.handle("c", "room:join", { name: "C", code: a.code });
+    const room = hub.rooms.get(a.code);
+    hub.handle("a", "room:configure", { ghostId: room.players[0].id });
+    assert(hub.handle("a", "game:start").ok);
+    const board = new Set(room.board.map((x) => x.id));
+    const killers = new Set(room.players.filter((p) => p.role === "detective").map((p) => p.killerId));
+    for (let k = 0; k < 3; k++) {
+      const hand = room.ghostHand;
+      assert.strictEqual(hand.length, HAND_SIZE);
+      const fit = (id) => (matches.omni.includes(id) ? 9 : (matches.cards[id] || []).filter((x) => board.has(x)).length);
+      assert(hand.filter((id) => fit(id) > 0 && fit(id) < 6 && (matches.cards[id] || []).some((x) => killers.has(x))).length >= 2, "needs 2 useful cards");
+      assert(hand.filter((id) => fit(id) === 0).length <= 1, "too many dead cards");
+      assert(hand.filter((id) => fit(id) >= 6).length <= 1, "too many omni cards");
+      hands++;
+      if (k < 2) assert(hub.handle("a", "ghost:shuffle").ok);
+    }
+  }
+  assert.strictEqual(hands, 900);
+});
+
 console.log(`\n${passed} test groups passed`);

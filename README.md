@@ -28,3 +28,8 @@ node tests/e2e.js        # real-browser test with 3 players (needs playwright)
 ## Structure
 - `server/hub.js` – all game rules (pure, testable) · `server/server.js` – Express + Socket.IO transport
 - `public/` – UI (`app.js`, `style.css`, `index.html`), `data/*.json`, `assets/`
+
+## Adding suspects and evidence
+1. Put the picture in `public/assets/suspects/` or `public/assets/evidence/` (file names are case-sensitive on Render).
+2. Add the entry to `public/data/suspects.json` / `evidence.json`. An entry whose picture is missing is skipped (see the server log), so the game never shows a broken card.
+3. Add the card to `public/data/matches.json` (`"card-id": ["suspect-id", ...]` = suspects whose portrait visibly contains that object). It is used to deal playable hands: at least 2 cards that fit a real culprit, at most 1 that fits nobody and at most 1 that fits almost everybody. The server logs a warning for unknown ids or cards without an entry.
